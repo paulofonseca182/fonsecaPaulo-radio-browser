@@ -1,40 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🎧 Radio Browser App
 
-## Getting Started
+Aplicação web para buscar, salvar e gerenciar rádios online.
 
-First, run the development server:
+## 🚀 Tecnologias Utilizadas
 
+* Linguagem: TypeScript
+
+* Framework: Next.js
+
+* Bibliotecas: React, Eslint, Axios, TailwindCSS
+
+## 📦 Instalação e Uso
+
+ ### 🔧 Requisitos
+
+* Node.js 16+
+
+* NPM ou Yarn
+
+## 📥 Instalando Dependências
+```bash
+npm install
+# ou
+yarn install
+```
+## 🔄 Configuração das Variáveis de Ambiente
+
+* Crie um arquivo .env.local na raiz do projeto e adicione:
+```bash
+NEXT_PUBLIC_RADIO_API_URL=https://de1.api.radio-browser.info/json/stations/search
+```
+## ▶️ Rodando o Projeto
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+* O projeto estará disponível em http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 Funcionalidades
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### ✅ Funcionalidades Obrigatórias
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Gerenciamento de Rádios
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+    * Adicionar rádios à lista pessoal.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    * Ver a lista de rádios adicionadas.
 
-## Learn More
+    * Remover rádios da lista.
 
-To learn more about Next.js, take a look at the following resources:
+    * Editar informações de uma rádio.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Player de Rádio
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    * Ouvir a rádio ao clicar no play.
 
-## Deploy on Vercel
+    * Parar a rádio ao clicar no stop.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-  Pesquisa e Filtros
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+    * Pesquisar rádios pelo nome.
+
+    * Filtrar por nome, país ou idioma.
+
+    * Paginação exibindo 10 rádios por vez.
+
+- Persistência de Dados
+
+    * As rádios adicionadas devem ser salvas para quando o usuário retornar.
+
+- Seguir a base do wireframe fornecido, com estilização livre.
+    * [Wireframe](https://www.figma.com/design/TDuhDdbwdzIVQjNV3GF9Qi/Radio?node-id=0-1&p=f&t=t7NZQ8EsSVnOsxkx-0)
+
+## 📂 .gitignore
+
+* O projeto inclui um .gitignore com exclusões essenciais, como:
+```Bash
+# Node.js
+node_modules/
+
+# Next.js
+.next/
+out/
+.vercel/
+
+# Configuração
+.env*
+
+# Outros
+.DS_Store
+*.log
+```
+Este projeto é um challenge by [Coodesh](https://coodesh.com/). 🚀
