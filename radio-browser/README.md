@@ -10,6 +10,9 @@ Aplicação web para buscar, salvar e gerenciar rádios online.
 
 * Bibliotecas: React, Eslint, Axios, TailwindCSS
 
+* API [Radio Browser API](https://api.radio-browser.info/)
+    - https://de1.api.radio-browser.info/json/stations/search?limit=10
+
 ## 📦 Instalação e Uso
 
  ### 🔧 Requisitos
