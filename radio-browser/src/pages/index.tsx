@@ -1,9 +1,9 @@
-import { fetchRadioStations } from '../services/radioBrowserAPI';
+import Search from "@/components/Search/Search";
+
 export default function Home() {
   return (
     <div>
-      <p>INICIO</p>
-      <button onClick={() => fetchRadioStations()}>Teste</button>
+      <Search />
     </div>
   );
 }

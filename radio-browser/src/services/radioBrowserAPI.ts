@@ -1,21 +1,29 @@
 import axios from 'axios';
-import {RadioStationType} from '../types/ApiType';
+import { RadioStationType } from '../types/ApiType';
 
-export async function fetchRadioStations(limit: number = 10): Promise<RadioStationType[]> {
+export async function fetchRadioStations(
+  country?: string,
+  language?: string,
+  name?: string,
+  limit: number = 10
+): Promise<RadioStationType[]> {
   const baseUrl = process.env.NEXT_PUBLIC_RADIO_API_URL;
   if (!baseUrl) {
-    throw new Error('A variável de ambiente não está definida');
+    throw new Error('Environment variable is not defined');
   }
-  
-  const url = `${baseUrl}?limit=${limit}`;
+
+  const params = new URLSearchParams({ limit: String(limit) });
+
+  if (country) params.append('country', country);
+  if (language) params.append('language', language);
+  if (name) params.append('name', name);
 
   try {
-    const response = await axios.get<RadioStationType[]>(url);
-    console.log(response);    
-    return response.data;
+    const { data } = await axios.get<RadioStationType[]>(`${baseUrl}?${params}`);
+    return data;
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      throw new Error(`Erro ao buscar as estações: ${error.message}`);
+      throw new Error(`Error when searching for stations: ${error.message}`);
     }
     throw error;
   }
