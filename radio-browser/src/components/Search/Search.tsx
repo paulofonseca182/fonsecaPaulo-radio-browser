@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { fetchRadioStations } from "@/services/radioBrowserAPI";
 import { RadioStationType } from "@/types/ApiType";
-import 'font-awesome/css/font-awesome.min.css';
+import "font-awesome/css/font-awesome.min.css";
+import { loadFavorites, saveFavorites } from "@/services/localStorageService";
 
 type FiltersType = "country" | "language" | "name" | undefined;
 
@@ -12,6 +13,7 @@ function Search() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<boolean>(false);
+  const [favoriteRadios, setFavoriteRadios] = useState<RadioStationType[]>([]);
   const limit = 10;
 
   const handleSearch = useCallback(async () => {
@@ -40,28 +42,50 @@ function Search() {
     }
   }, [page, searchField, selectedFilter]);
 
+  const handleCheckboxChange = (filter: "country" | "language" | "name") => {
+    setSelectedFilter((prevFilter) =>
+      prevFilter === filter ? undefined : filter
+    );
+  };
+  
   useEffect(() => {
     handleSearch();
   }, [page]);
 
-  const handleCheckboxChange = (filter: "country" | "language" | "name") => {
-    setSelectedFilter((prevFilter) => (prevFilter === filter ? undefined : filter));
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    handleSearch(); 
+    handleSearch();
   };
-
+  
+  const toggleFavorite = (radio: RadioStationType) => {
+    setFavoriteRadios((prevFavoriteRadios) => {
+      const isFavorite = prevFavoriteRadios.some(
+        (fav) => fav.stationuuid === radio.stationuuid
+      );
+      const updatedFavorites = isFavorite
+      ? prevFavoriteRadios.filter(
+        (fav) => fav.stationuuid !== radio.stationuuid
+      )
+      : [...prevFavoriteRadios, radio];
+      
+      saveFavorites(updatedFavorites);
+      return updatedFavorites;
+    });
+  };
+  
+  useEffect(() => {
+    const savedFavorites = loadFavorites();
+    setFavoriteRadios(savedFavorites);
+  }, [favoriteRadios]);
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <i
-            onClick={() => setFilter(!filter)}
-            className="fa fa-bars"
-            aria-hidden="true"
-          > Filter</i>
+          <i onClick={() => setFilter(!filter)} className="fa fa-bars">
+            {" "}
+            Filter
+          </i>
 
           {filter && (
             <section>
@@ -100,14 +124,7 @@ function Search() {
         />
 
         <button type="submit" disabled={isLoading}>
-          {isLoading ? (
-            "Loading..."
-          ) : (
-            <i className="fa fa-search" aria-hidden="true">
-              {" "}
-              Search
-            </i>
-          )}
+          {isLoading ? "Loading..." : <i className="fa fa-search"> Search</i>}
         </button>
       </form>
 
@@ -122,6 +139,17 @@ function Search() {
             radios.map((radio) => (
               <li key={radio.stationuuid}>
                 <p>{radio.name}</p>
+                <button onClick={() => toggleFavorite(radio)}>
+                  <i
+                    className={`fa ${
+                      favoriteRadios.some(
+                        (fav) => fav.stationuuid === radio.stationuuid
+                      )
+                        ? "fa-heart"
+                        : "fa-heart-o"
+                    }`}
+                  ></i>
+                </button>
               </li>
             ))
           )}
@@ -133,14 +161,14 @@ function Search() {
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
         >
-          <i className="fa fa-chevron-left" aria-hidden="true"></i>
+          <i className="fa fa-chevron-left"></i>
         </button>
         <span> Page {page} </span>
         <button
           onClick={() => setPage((prev) => prev + 1)}
           disabled={radios.length < limit}
         >
-          <i className="fa fa-chevron-right" aria-hidden="true"></i>
+          <i className="fa fa-chevron-right"></i>
         </button>
       </div>
     </div>
