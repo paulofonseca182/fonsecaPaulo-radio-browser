@@ -30,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const savedFavorites = loadFavorites();
     setFavoriteRadios(savedFavorites);
-  }, [favoriteRadios]);
+  }, []);
 
   return (
     <div>
