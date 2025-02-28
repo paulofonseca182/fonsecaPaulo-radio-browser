@@ -36,3 +36,10 @@ export type RadioStationType = {
     geo_long: number | null;
     has_extended_info: boolean;
   }
+
+  export type FiltersType = "country" | "language" | "name" | undefined
+
+  export type FavoritesPropsType = {
+    favoriteRadios: RadioStationType[];
+    toggleFavorite: (radio: RadioStationType) => void
+  }

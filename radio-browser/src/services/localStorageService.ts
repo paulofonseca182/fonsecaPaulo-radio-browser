@@ -1,4 +1,4 @@
-import { RadioStationType } from "@/types/ApiType";
+import { RadioStationType } from "@/types/types";
 
 export const loadFavorites = (): RadioStationType[] => {
   const storedFavorites = localStorage.getItem("favoriteRadios");

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RadioStationType } from "../types/ApiType";
+import { RadioStationType } from "../types/types";
 
 export async function fetchRadioStations(
   country?: string,

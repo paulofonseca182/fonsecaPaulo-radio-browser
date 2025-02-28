@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { fetchRadioStations } from "@/services/radioBrowserAPI";
-import { RadioStationType } from "@/types/ApiType";
+import { RadioStationType, FavoritesPropsType, FiltersType} from "@/types/types"
 import "font-awesome/css/font-awesome.min.css";
-import { loadFavorites, saveFavorites } from "@/services/localStorageService";
 
-type FiltersType = "country" | "language" | "name" | undefined;
-
-function Search() {
+function Search( { favoriteRadios, toggleFavorite }: FavoritesPropsType,  ) {
   const [searchField, setSearchField] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<FiltersType>(undefined);
   const [radios, setRadios] = useState<RadioStationType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [filter, setFilter] = useState<boolean>(false);
-  const [favoriteRadios, setFavoriteRadios] = useState<RadioStationType[]>([]);
   const limit = 10;
 
   const handleSearch = useCallback(async () => {
@@ -47,7 +43,7 @@ function Search() {
       prevFilter === filter ? undefined : filter
     );
   };
-  
+
   useEffect(() => {
     handleSearch();
   }, [page]);
@@ -58,26 +54,9 @@ function Search() {
     handleSearch();
   };
   
-  const toggleFavorite = (radio: RadioStationType) => {
-    setFavoriteRadios((prevFavoriteRadios) => {
-      const isFavorite = prevFavoriteRadios.some(
-        (fav) => fav.stationuuid === radio.stationuuid
-      );
-      const updatedFavorites = isFavorite
-      ? prevFavoriteRadios.filter(
-        (fav) => fav.stationuuid !== radio.stationuuid
-      )
-      : [...prevFavoriteRadios, radio];
-      
-      saveFavorites(updatedFavorites);
-      return updatedFavorites;
-    });
-  };
+
   
-  useEffect(() => {
-    const savedFavorites = loadFavorites();
-    setFavoriteRadios(savedFavorites);
-  }, [favoriteRadios]);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
