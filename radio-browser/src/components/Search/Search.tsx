@@ -11,6 +11,7 @@ function Search() {
   const [radios, setRadios] = useState<RadioStationType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
+  const [filter, setFilter] = useState<boolean>(false);
   const limit = 10;
 
   const handleSearch = useCallback(async () => {
@@ -56,30 +57,40 @@ function Search() {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>
-            <input
-              type="checkbox"
-              checked={selectedFilter === "country"}
-              onChange={() => handleCheckboxChange("country")}
-            />
-            Country
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={selectedFilter === "language"}
-              onChange={() => handleCheckboxChange("language")}
-            />
-            Language
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={selectedFilter === "name"}
-              onChange={() => handleCheckboxChange("name")}
-            />
-            Name
-          </label>
+          <i
+            onClick={() => setFilter(!filter)}
+            className="fa fa-bars"
+            aria-hidden="true"
+          > Filter</i>
+
+          {filter && (
+            <section>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedFilter === "country"}
+                  onChange={() => handleCheckboxChange("country")}
+                />
+                Country
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedFilter === "language"}
+                  onChange={() => handleCheckboxChange("language")}
+                />
+                Language
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={selectedFilter === "name"}
+                  onChange={() => handleCheckboxChange("name")}
+                />
+                Name
+              </label>
+            </section>
+          )}
         </div>
         <input
           type="text"
@@ -88,9 +99,15 @@ function Search() {
           onChange={(e) => setSearchField(e.target.value)}
         />
 
-
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : <i className="fa fa-search" aria-hidden="true"> Search</i>}
+          {isLoading ? (
+            "Loading..."
+          ) : (
+            <i className="fa fa-search" aria-hidden="true">
+              {" "}
+              Search
+            </i>
+          )}
         </button>
       </form>
 
@@ -112,11 +129,17 @@ function Search() {
       )}
 
       <div>
-        <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1}>
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
           <i className="fa fa-chevron-left" aria-hidden="true"></i>
         </button>
         <span> Page {page} </span>
-        <button onClick={() => setPage((prev) => prev + 1)} disabled={radios.length < limit}>
+        <button
+          onClick={() => setPage((prev) => prev + 1)}
+          disabled={radios.length < limit}
+        >
           <i className="fa fa-chevron-right" aria-hidden="true"></i>
         </button>
       </div>
