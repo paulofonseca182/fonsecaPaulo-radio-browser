@@ -3,7 +3,7 @@ import { fetchRadioStations } from "@/services/radioBrowserAPI";
 import { RadioStationType, FavoritesPropsType, FiltersType} from "@/types/types"
 import "font-awesome/css/font-awesome.min.css";
 
-function Search( { favoriteRadios, toggleFavorite }: FavoritesPropsType,  ) {
+function Search( { favoriteRadios, toggleFavorite }: FavoritesPropsType  ) {
   const [searchField, setSearchField] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<FiltersType>(undefined);
   const [radios, setRadios] = useState<RadioStationType[]>([]);

@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div>
       <Search favoriteRadios={favoriteRadios} toggleFavorite={toggleFavorite}  />
-      <Favorites />
+      <Favorites favoriteRadios={favoriteRadios} toggleFavorite={toggleFavorite} />
     </div>
   );
 }
