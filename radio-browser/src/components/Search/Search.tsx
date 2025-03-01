@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { fetchRadioStations } from "@/services/radioBrowserAPI";
-import { RadioStationType, FavoritesPropsType, FiltersType} from "@/types/types"
+import { RadioStationType, PropsType, FiltersType} from "@/types/types"
 import "font-awesome/css/font-awesome.min.css";
 
-function Search( { favoriteRadios, toggleFavorite }: FavoritesPropsType  ) {
+function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: PropsType  ) {
   const [searchField, setSearchField] = useState<string>("");
   const [selectedFilter, setSelectedFilter] = useState<FiltersType>(undefined);
   const [radios, setRadios] = useState<RadioStationType[]>([]);
@@ -117,6 +117,7 @@ function Search( { favoriteRadios, toggleFavorite }: FavoritesPropsType  ) {
           ) : (
             radios.map((radio) => (
               <li key={radio.stationuuid}>
+                <i className="fa fa-play-circle-o" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
                 <p>{radio.name}</p>
                 <button onClick={() => toggleFavorite(radio)}>
                   <i

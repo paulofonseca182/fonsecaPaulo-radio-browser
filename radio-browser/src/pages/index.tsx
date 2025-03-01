@@ -3,13 +3,12 @@ import Search from "@/components/Search/Search";
 import { RadioStationType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { loadFavorites, saveFavorites } from "@/services/localStorageService";
-
-
-
+import CurrentRadioPlaying from "@/components/CurrentRadioPlaying/CurrentRadioPlaying";
 
 export default function Home() {
-
   const [favoriteRadios, setFavoriteRadios] = useState<RadioStationType[]>([]);
+  const [currentRadioPlaying, setCurrentRadioPlaying] =
+    useState<RadioStationType>();
 
   const toggleFavorite = (radio: RadioStationType) => {
     setFavoriteRadios((prevFavoriteRadios) => {
@@ -17,11 +16,11 @@ export default function Home() {
         (fav) => fav.stationuuid === radio.stationuuid
       );
       const updatedFavorites = isFavorite
-      ? prevFavoriteRadios.filter(
-        (fav) => fav.stationuuid !== radio.stationuuid
-      )
-      : [...prevFavoriteRadios, radio];
-      
+        ? prevFavoriteRadios.filter(
+            (fav) => fav.stationuuid !== radio.stationuuid
+          )
+        : [...prevFavoriteRadios, radio];
+
       saveFavorites(updatedFavorites);
       return updatedFavorites;
     });
@@ -34,8 +33,18 @@ export default function Home() {
 
   return (
     <div>
-      <Search favoriteRadios={favoriteRadios} toggleFavorite={toggleFavorite}  />
-      <Favorites favoriteRadios={favoriteRadios} toggleFavorite={toggleFavorite} />
+      <Search
+        favoriteRadios={favoriteRadios}
+        toggleFavorite={toggleFavorite}
+        currentRadioPlaying={currentRadioPlaying}
+        setCurrentRadioPlaying={setCurrentRadioPlaying}
+      />
+      <CurrentRadioPlaying currentRadioPlaying={currentRadioPlaying} />
+      <Favorites
+        favoriteRadios={favoriteRadios}
+        toggleFavorite={toggleFavorite}
+        setCurrentRadioPlaying={setCurrentRadioPlaying}
+      />
     </div>
   );
 }

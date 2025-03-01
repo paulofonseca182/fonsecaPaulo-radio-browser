@@ -39,9 +39,15 @@ export type RadioStationType = {
 
   export type FiltersType = "country" | "language" | "name" | undefined
 
-  export type FavoritesPropsType = {
+  export type PropsType = {
     favoriteRadios: RadioStationType[];
     toggleFavorite: (radio: RadioStationType) => void
+    currentRadioPlaying?: RadioStationType | undefined
+    setCurrentRadioPlaying?: (radio: RadioStationType) => void
+  }
+
+  export type PropsPlayingType = {
+    currentRadioPlaying: RadioStationType | undefined
   }
 
   export type DescriptionsRadios = {

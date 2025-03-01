@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { DescriptionsRadios, FavoritesPropsType } from "@/types/types";
+import { DescriptionsRadios, PropsType } from "@/types/types";
 import {
   loadDescription,
   saveDescription,
 } from "@/services/localStorageService";
 
-function Favorites({ favoriteRadios, toggleFavorite }: FavoritesPropsType) {
+function Favorites({ favoriteRadios, toggleFavorite, setCurrentRadioPlaying }: PropsType) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,6 +72,9 @@ function Favorites({ favoriteRadios, toggleFavorite }: FavoritesPropsType) {
           <ul>
             {currentRadios.map((radio) => (
               <li key={radio.stationuuid}>
+
+                <i className="fa fa-play-circle-o" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
+
                 <p>{radio.name}</p>
                 <div>
                   <i
