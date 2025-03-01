@@ -1,4 +1,4 @@
-import { RadioStationType } from "@/types/types";
+import { DescriptionsRadios, RadioStationType } from "@/types/types";
 
 export const loadFavorites = (): RadioStationType[] => {
   const storedFavorites = localStorage.getItem("favoriteRadios");
@@ -7,4 +7,14 @@ export const loadFavorites = (): RadioStationType[] => {
 
 export const saveFavorites = (favorites: RadioStationType[]): void => {
   localStorage.setItem("favoriteRadios", JSON.stringify(favorites));
+};
+
+export const loadDescription = (): DescriptionsRadios  => {
+  const storedDescriptions = localStorage.getItem("radioDescriptions");
+  return storedDescriptions ? JSON.parse(storedDescriptions) : {}; 
+};
+
+
+export const saveDescription = (descriptions: DescriptionsRadios): void => {
+  localStorage.setItem("radioDescriptions", JSON.stringify(descriptions));
 };

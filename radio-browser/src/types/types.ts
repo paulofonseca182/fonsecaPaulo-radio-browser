@@ -43,3 +43,7 @@ export type RadioStationType = {
     favoriteRadios: RadioStationType[];
     toggleFavorite: (radio: RadioStationType) => void
   }
+
+  export type DescriptionsRadios = {
+    [key: string]: string;
+  }

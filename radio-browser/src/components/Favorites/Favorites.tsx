@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { FavoritesPropsType } from "@/types/types";
+import React, { useEffect, useState } from "react";
+import { DescriptionsRadios, FavoritesPropsType } from "@/types/types";
+import {
+  loadDescription,
+  saveDescription,
+} from "@/services/localStorageService";
 
 function Favorites({ favoriteRadios, toggleFavorite }: FavoritesPropsType) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [descriptions, setDescriptions] = useState<DescriptionsRadios>({});
   const radiosPerPage = 10;
-
 
   const filteredRadios = favoriteRadios.filter((radio) => {
     return (
@@ -16,13 +20,33 @@ function Favorites({ favoriteRadios, toggleFavorite }: FavoritesPropsType) {
     );
   });
 
-
   const indexOfLastRadio = currentPage * radiosPerPage;
   const indexOfFirstRadio = indexOfLastRadio - radiosPerPage;
-  const currentRadios = filteredRadios.slice(indexOfFirstRadio, indexOfLastRadio);
-
-
+  const currentRadios = filteredRadios.slice(
+    indexOfFirstRadio,
+    indexOfLastRadio
+  );
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    const storedDescriptions = loadDescription();
+    setDescriptions(storedDescriptions);
+  }, []);
+
+  const toggleDescription = (stationuuid: string) => {
+    const newDescription = prompt(
+      "Enter a description for this radio:",
+      descriptions[stationuuid]
+    );
+    if (newDescription !== null) {
+      const updatedDescriptions = {
+        ...descriptions,
+        [stationuuid]: newDescription,
+      };
+      setDescriptions(updatedDescriptions);
+      saveDescription(updatedDescriptions);
+    }
+  };
 
   return (
     <div>
@@ -49,7 +73,20 @@ function Favorites({ favoriteRadios, toggleFavorite }: FavoritesPropsType) {
             {currentRadios.map((radio) => (
               <li key={radio.stationuuid}>
                 <p>{radio.name}</p>
-                <i onClick={() => toggleFavorite(radio)} className="fa fa-trash-o"></i>
+                <div>
+                  <i
+                    onClick={() => toggleDescription(radio.stationuuid)}
+                    className="fa fa-pencil"
+                  ></i>
+                  <i
+                    onClick={() => toggleFavorite(radio)}
+                    className="fa fa-trash-o"
+                  ></i>
+                </div>
+
+                {descriptions[radio.stationuuid] && (
+                  <p>{descriptions[radio.stationuuid]}</p>
+                )}
               </li>
             ))}
           </ul>
