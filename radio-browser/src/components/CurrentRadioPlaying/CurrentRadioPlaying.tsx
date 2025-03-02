@@ -47,25 +47,38 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
   }, [currentRadioPlaying, volume]);
 
   return (
-    <div>
+    <div className="current-radio-playing-container">
+      <h1 className="title-radio-browser">Radio Browser</h1>
       {currentRadioPlaying ? (
         <div>
-          <audio autoPlay ref={audioRef} src={currentRadioPlaying.url}></audio>
-          <button onClick={togglePlayPause}>
-            {isPlaying ? <i className="fa fa-pause"></i> : <i className="fa fa-play"></i>}
-          </button>
+          <div className="current-radio-playing">
 
-          <section>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={handleVolumeChange}
-            />
-            <span><i className="fa fa-volume-up"></i></span>
-          </section>
+            <section className="radio-control">
+            <audio
+              autoPlay
+              ref={audioRef}
+              src={currentRadioPlaying.url}
+            ></audio>
+            <button onClick={togglePlayPause}>
+              {isPlaying ? (
+                <i className="fa fa-pause"></i>
+              ) : (
+                <i className="fa fa-play"></i>
+              )}
+            </button>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.01"
+                value={volume}
+                onChange={handleVolumeChange}
+              />
+              <span>
+                <i className="fa fa-volume-up"></i>
+              </span>
+            </section>
+          </div>
           <p>{currentRadioPlaying.name}</p>
         </div>
       ) : (

@@ -1,0 +1,8 @@
+.section-body-playing {
+    width: 100%;
+    margin-left: 30px;
+    padding: 20px;
+    background-color: #3c3b3b;
+    border-radius: 10px;
+    box-shadow: #ffc400 0px 0px 10px
+}

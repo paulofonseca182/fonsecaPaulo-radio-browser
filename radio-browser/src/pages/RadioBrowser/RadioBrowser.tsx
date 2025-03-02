@@ -40,8 +40,7 @@ function RadioBrowser() {
         currentRadioPlaying={currentRadioPlaying}
         setCurrentRadioPlaying={setCurrentRadioPlaying}
       />
-      <section>
-        <h2>Radio Browser</h2>
+      <section className='section-body-playing'>
       <CurrentRadioPlaying currentRadioPlaying={currentRadioPlaying} />
       <Favorites
         favoriteRadios={favoriteRadios}

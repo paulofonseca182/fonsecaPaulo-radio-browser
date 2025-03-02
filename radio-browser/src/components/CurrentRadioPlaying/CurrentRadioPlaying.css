@@ -1,0 +1,72 @@
+.current-radio-playing-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #232222;
+    border-radius: 10px;
+    height: 150px;
+    box-shadow: #7d7d7d 0px 0px 10px;
+    width: 100%;
+}
+
+.current-radio-playing-container div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.current-radio-playing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}   
+
+.current-radio-playing button {
+    margin-right: 30px;
+}
+
+@keyframes pulseGlow {
+    0% {
+        text-shadow: 0 0 3px #ffc400, 0 0 10px #ffea00, 0 0 15px #ffea00;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 7px #ffea00, 0 0 20px #ffc400, 0 0 25px #ffea00;
+        transform: scale(1.02);
+    }
+    100% {
+        text-shadow: 0 0 3px #ffc400, 0 0 10px #ffea00, 0 0 15px #ffea00;
+        transform: scale(1);
+    }
+}
+
+.current-radio-playing-container div p {
+    color: #ffc400;
+    margin-top: 5px;
+    font-size: 20px;
+    animation: pulseGlow 2s infinite alternate ease-in-out;
+}
+
+.current-radio-playing button i {
+    font-size: 30px;
+}
+
+.current-radio-playing span i {
+    margin-left: 5px;
+}
+
+.radio-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.title-radio-browser {
+    font-size: 40px;
+    color: #ffc400;
+}
