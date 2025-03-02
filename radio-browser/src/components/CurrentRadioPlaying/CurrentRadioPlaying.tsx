@@ -64,7 +64,7 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
               value={volume}
               onChange={handleVolumeChange}
             />
-            <span>{Math.round(volume * 100)}%</span>
+            <span><i className="fa fa-volume-up"></i></span>
           </section>
           <p>{currentRadioPlaying.name}</p>
         </div>
