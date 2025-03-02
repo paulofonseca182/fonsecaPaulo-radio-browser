@@ -73,7 +73,7 @@ function Favorites({ favoriteRadios, toggleFavorite, setCurrentRadioPlaying }: P
             {currentRadios.map((radio) => (
               <li key={radio.stationuuid}>
 
-                <i className="fa fa-play-circle-o" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
+                <i className="fa fa-play-circle" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
 
                 <p>{radio.name}</p>
                 <div>

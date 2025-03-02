@@ -33,19 +33,22 @@ function RadioBrowser() {
       setFavoriteRadios(savedFavorites);
     }, []);
   return (
-    <div>
+    <div className="flex flex-row ">
       <Search
         favoriteRadios={favoriteRadios}
         toggleFavorite={toggleFavorite}
         currentRadioPlaying={currentRadioPlaying}
         setCurrentRadioPlaying={setCurrentRadioPlaying}
       />
+      <section>
+        <h2>Radio Browser</h2>
       <CurrentRadioPlaying currentRadioPlaying={currentRadioPlaying} />
       <Favorites
         favoriteRadios={favoriteRadios}
         toggleFavorite={toggleFavorite}
         setCurrentRadioPlaying={setCurrentRadioPlaying}
       />
+      </section>
     </div>
   )
 }

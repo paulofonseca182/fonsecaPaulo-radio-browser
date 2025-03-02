@@ -9,7 +9,7 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
   const [radios, setRadios] = useState<RadioStationType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-  const [filter, setFilter] = useState<boolean>(false);
+  const [filter, setFilter] = useState<boolean>(true);
   const limit = 10;
 
   const handleSearch = useCallback(async () => {
@@ -58,16 +58,16 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
   
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="search-container">
+      <form className="search-form" onSubmit={handleSubmit}>
+        <div className=" search-filters-container ">
           <i onClick={() => setFilter(!filter)} className="fa fa-bars">
             {" "}
             Filter
           </i>
 
           {filter && (
-            <section>
+            <section className="search-filters">
               <label>
                 <input
                   type="checkbox"
@@ -95,48 +95,57 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
             </section>
           )}
         </div>
-        <input
-          type="text"
-          placeholder="Search term"
-          value={searchField}
-          onChange={(e) => setSearchField(e.target.value)}
-        />
 
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : <i className="fa fa-search"> Search</i>}
-        </button>
+        <div className="input-search-container">
+          <input
+            type="text"
+            placeholder="Search term"
+            value={searchField}
+            onChange={(e) => setSearchField(e.target.value)}
+          />
+
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Loading..." : <i className="fa fa-search"> Search</i>}
+          </button>
+        </div>
       </form>
 
-      <h3>Radios:</h3>
       {isLoading ? (
-        <p>Loading...</p>
+        //colocar className no p para centralizar texto ao centro com lib tailwindcss
+        <p className="text-center">Loading...</p>
       ) : (
-        <ul>
-          {radios.length === 0 ? (
-            <p>No stations found.</p>
-          ) : (
-            radios.map((radio) => (
-              <li key={radio.stationuuid}>
-                <i className="fa fa-play-circle-o" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
-                <p>{radio.name}</p>
-                <button onClick={() => toggleFavorite(radio)}>
+        <div>
+          <h3 className="text-radios">Radios:</h3>
+          <ul>
+            {radios.length === 0 ? (
+              <p>No stations found.</p>
+            ) : (
+              radios.map((radio) => (
+                <li className="search-radios" key={radio.stationuuid}>
                   <i
-                    className={`fa ${
-                      favoriteRadios.some(
-                        (fav) => fav.stationuuid === radio.stationuuid
-                      )
-                        ? "fa-heart"
-                        : "fa-heart-o"
-                    }`}
+                    className="fa fa-play-circle"
+                    onClick={() => setCurrentRadioPlaying?.(radio)}
                   ></i>
-                </button>
-              </li>
-            ))
-          )}
-        </ul>
+                  <p className="">{radio.name}</p>
+                  <button onClick={() => toggleFavorite(radio)}>
+                    <i
+                      className={`fa ${
+                        favoriteRadios.some(
+                          (fav) => fav.stationuuid === radio.stationuuid
+                        )
+                          ? "fa-heart"
+                          : "fa-heart-o"
+                      }`}
+                    ></i>
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
       )}
 
-      <div>
+      <div className=" text-center ">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
