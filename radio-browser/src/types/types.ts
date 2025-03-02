@@ -53,3 +53,7 @@ export type RadioStationType = {
   export type DescriptionsRadios = {
     [key: string]: string;
   }
+
+  export type ReproductionData = {
+    volume: number;
+  }

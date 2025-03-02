@@ -1,14 +1,21 @@
-import { PropsPlayingType } from '@/types/types'
-import React, { useEffect, useRef, useState } from 'react'
+import { loadReproductionData, saveReproductionData } from '@/services/localStorageService';
+import { PropsPlayingType } from '@/types/types';
+import React, { useEffect, useRef, useState } from 'react';
 
-
-function CurrentRadioPlaying({currentRadioPlaying}: PropsPlayingType) {
-
+function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState<number>(1);
 
-  
+  useEffect(() => {
+    const datareproduction = loadReproductionData();
+    const savedVolume = datareproduction ? datareproduction.volume : 1;
+    setVolume(savedVolume);
+
+    if (audioRef.current) {
+      audioRef.current.volume = savedVolume;
+    }
+  }, []);
 
   const togglePlayPause = () => {
     if (!audioRef.current) return;
@@ -24,16 +31,21 @@ function CurrentRadioPlaying({currentRadioPlaying}: PropsPlayingType) {
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = Number(e.target.value);
     setVolume(newVolume);
+    saveReproductionData({ volume: newVolume });
+
     if (audioRef.current) {
-      audioRef.current.volume = newVolume;
+      audioRef.current.volume = newVolume; 
     }
   };
 
   useEffect(() => {
-    setIsPlaying(true);
-  },[currentRadioPlaying])
+    if (currentRadioPlaying && audioRef.current) {
+      audioRef.current.volume = volume;
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  }, [currentRadioPlaying, volume]);
 
-  
   return (
     <div>
       {currentRadioPlaying ? (
@@ -44,15 +56,15 @@ function CurrentRadioPlaying({currentRadioPlaying}: PropsPlayingType) {
           </button>
 
           <section>
-          <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-      />
-      <span>{Math.round(volume * 100)}%</span>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+            <span>{Math.round(volume * 100)}%</span>
           </section>
           <p>{currentRadioPlaying.name}</p>
         </div>
@@ -64,4 +76,3 @@ function CurrentRadioPlaying({currentRadioPlaying}: PropsPlayingType) {
 }
 
 export default CurrentRadioPlaying;
-
