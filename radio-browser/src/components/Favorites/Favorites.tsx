@@ -50,7 +50,7 @@ function Favorites({ favoriteRadios, toggleFavorite, setCurrentRadioPlaying }: P
 
   return (
     <div>
-      <div>
+      <div className="search-favorites-container">
         <i onClick={() => setFilter(!filter)} className="fa fa-search">
           {" "}
           Search
@@ -65,51 +65,57 @@ function Favorites({ favoriteRadios, toggleFavorite, setCurrentRadioPlaying }: P
         )}
       </div>
 
-      <div>
+      <div className="favorites-radios-container">
         {currentRadios.length === 0 ? (
-          <p>You don&apos;t have any favorite radios yet.</p>
+          <p className="no-favorites">
+            You don&apos;t have any favorite radios yet.
+          </p>
         ) : (
-          <ul>
-            {currentRadios.map((radio) => (
-              <li key={radio.stationuuid}>
-
-                <i className="fa fa-play-circle" onClick={() => setCurrentRadioPlaying?.(radio)} ></i>
-
-                <p>{radio.name}</p>
-                <div>
+          <div className="favorites-radios-sub-container">
+            <ul>
+              {currentRadios.map((radio) => (
+                <li className="favorites-radios" key={radio.stationuuid}>
                   <i
-                    onClick={() => toggleDescription(radio.stationuuid)}
-                    className="fa fa-pencil"
+                    className="fa fa-play-circle"
+                    onClick={() => setCurrentRadioPlaying?.(radio)}
                   ></i>
-                  <i
-                    onClick={() => toggleFavorite(radio)}
-                    className="fa fa-trash-o"
-                  ></i>
-                </div>
+                  <div className="favorites-radios-info">
+                    <p>{radio.name}</p>
+                    {descriptions[radio.stationuuid] && (
+                      <p>{descriptions[radio.stationuuid]}</p>
+                    )}
+                  </div>
+                  <div className="favorites-radios-actions">
+                    <i
+                      onClick={() => toggleDescription(radio.stationuuid)}
+                      className="fa fa-pencil"
+                    ></i>
+                    <i
+                      onClick={() => toggleFavorite(radio)}
+                      className="fa fa-trash-o"
+                    ></i>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-                {descriptions[radio.stationuuid] && (
-                  <p>{descriptions[radio.stationuuid]}</p>
-                )}
-              </li>
-            ))}
-          </ul>
+            <div className="pagination-favorites">
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                <i className="fa fa-chevron-left"></i>
+              </button>
+              <span>{`Page ${currentPage}`}</span>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                disabled={currentPage * radiosPerPage >= filteredRadios.length}
+              >
+                <i className="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
         )}
-      </div>
-
-      <div>
-        <button
-          onClick={() => paginate(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <i className="fa fa-chevron-left"></i>
-        </button>
-        <span>{`Page ${currentPage}`}</span>
-        <button
-          onClick={() => paginate(currentPage + 1)}
-          disabled={currentPage * radiosPerPage >= filteredRadios.length}
-        >
-          <i className="fa fa-chevron-right"></i>
-        </button>
       </div>
     </div>
   );

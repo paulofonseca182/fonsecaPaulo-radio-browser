@@ -145,7 +145,7 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
         </div>
       )}
 
-      <div className=" text-center ">
+      <div className=" pagination-search ">
         <button
           onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
           disabled={page === 1}
