@@ -8,7 +8,7 @@ export async function fetchRadioStations(
   limit: number = 10,
   offset: number = 0
 ): Promise<RadioStationType[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_RADIO_API_URL;
+  const baseUrl = 'https://de1.api.radio-browser.info/json/stations/search?';
   if (!baseUrl) {
     throw new Error("Environment variable is not defined");
   }
@@ -22,7 +22,7 @@ export async function fetchRadioStations(
   if (language) searchParams["language"] = language;
   if (name) searchParams["name"] = name;
 
-  const url = `${baseUrl}/json/stations/search?${new URLSearchParams(
+  const url = `${baseUrl}${new URLSearchParams(
     Object.entries(searchParams).map(([key, value]) => [key, String(value)])
   ).toString()}`;
 

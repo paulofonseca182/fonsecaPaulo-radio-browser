@@ -27,12 +27,6 @@ npm install
 # ou
 yarn install
 ```
-## 🔄 Configuração das Variáveis de Ambiente
-
-* Crie um arquivo .env.local na raiz do projeto e adicione:
-```bash
-NEXT_PUBLIC_RADIO_API_URL=https://de1.api.radio-browser.info
-```
 ## ▶️ Rodando o Projeto
 ```bash
 npm run dev
