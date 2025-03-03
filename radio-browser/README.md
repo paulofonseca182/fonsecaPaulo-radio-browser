@@ -83,6 +83,24 @@ yarn dev
 ![App Screenshot](/assets/iPhone-12-search.png)
 ![App Screenshot](/assets/iPhone-12-PRO-favorites.png)
 
+## ✅ Gestão de Tarefas com Trello e Metodologias Ágeis
+
+Utilização do **Trello** para organizar e gerenciar as tarefas seguindo uma abordagem de **metodologia ágil**. As tarefas foram divididas em diferentes etapas, o que permitiu um fluxo de trabalho eficiente e bem estruturado.
+
+[Acesse o Trello](https://trello.com/b/Y5vYgdyE/radio-browser)
+
+### Estrutura do Trello
+
+As tarefas foram organizadas em diferentes listas no Trello, com base nas funcionalidades e requisitos do projeto:
+
+- **Backlog**: Tarefas e ideias futuras.
+- **To Do (A Fazer)**: Tarefas planejadas para execução.
+- **In Progress (Em Progresso)**: Tarefas que estão sendo trabalhadas.
+- **Done (Concluído)**: Tarefas finalizadas.
+
+Essa organização ajudou a manter o controle do progresso, possibilitou a visualização do que está sendo feito e o que ainda precisa ser feito, garantindo a entrega contínua das funcionalidades.
+
+
 
 ## 📂 .gitignore
 
