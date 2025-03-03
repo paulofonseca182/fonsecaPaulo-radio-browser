@@ -1,6 +1,9 @@
-import { loadReproductionData, saveReproductionData } from '@/services/localStorageService';
-import { PropsPlayingType } from '@/types/types';
-import React, { useEffect, useRef, useState } from 'react';
+import {
+  loadReproductionData,
+  saveReproductionData,
+} from "@/services/localStorageService";
+import { PropsPlayingType } from "@/types/types";
+import React, { useEffect, useRef, useState } from "react";
 
 function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -10,7 +13,7 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
   useEffect(() => {
     const datareproduction = loadReproductionData();
     console.log(datareproduction);
-    
+
     const savedVolume = datareproduction.volume || 1;
     setVolume(savedVolume);
 
@@ -36,7 +39,7 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
     saveReproductionData({ volume: newVolume });
 
     if (audioRef.current) {
-      audioRef.current.volume = newVolume; 
+      audioRef.current.volume = newVolume;
     }
   };
 
@@ -54,20 +57,19 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
       {currentRadioPlaying ? (
         <div>
           <div className="current-radio-playing">
-
             <section className="radio-control">
-            <audio
-              autoPlay
-              ref={audioRef}
-              src={currentRadioPlaying.url}
-            ></audio>
-            <button onClick={togglePlayPause}>
-              {isPlaying ? (
-                <i className="fa fa-pause"></i>
-              ) : (
-                <i className="fa fa-play"></i>
-              )}
-            </button>
+              <audio
+                autoPlay
+                ref={audioRef}
+                src={currentRadioPlaying.url}
+              ></audio>
+              <button onClick={togglePlayPause}>
+                {isPlaying ? (
+                  <i className="fa fa-pause"></i>
+                ) : (
+                  <i className="fa fa-play"></i>
+                )}
+              </button>
               <input
                 type="range"
                 min="0"
@@ -81,7 +83,7 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
               </span>
             </section>
           </div>
-          <p>{currentRadioPlaying.name}</p>
+          <p className="name-radio">{currentRadioPlaying.name}</p>
         </div>
       ) : (
         <p>Listen to your favorite radio now!</p>
