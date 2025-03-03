@@ -2,6 +2,8 @@
 
 Aplicação web para buscar, salvar e gerenciar rádios online.
 
+📻 [Acesse o APP desenvolvido e escute sua radio favorita.](https://radio-browser-paulofonseca.vercel.app/)
+
 ## 🚀 Tecnologias Utilizadas
 
 * Linguagem: TypeScript
