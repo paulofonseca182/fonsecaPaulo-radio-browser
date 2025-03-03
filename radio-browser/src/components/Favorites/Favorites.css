@@ -95,3 +95,17 @@
     justify-content: center;
     align-items: center;
 }
+
+.pagination-favorites button:disabled {
+    color: #807f7f5f;
+}
+
+@media (max-width: 1024px) {
+    .favorites-radios-container {
+        padding: 0px 0px;
+    }
+
+    .favorites-radios{
+        padding: 0px 10px ;
+    }
+  } 

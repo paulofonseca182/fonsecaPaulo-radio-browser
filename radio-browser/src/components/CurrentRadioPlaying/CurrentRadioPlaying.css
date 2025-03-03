@@ -70,3 +70,30 @@
     font-size: 40px;
     color: #ffc400;
 }
+
+@media (max-width: 1024px) {
+    .current-radio-playing-container{
+        padding: 10px;
+        justify-content: space-between;
+    }
+
+    @keyframes pulseGlow {
+        0% {
+            text-shadow: 0 0 3px #ffc400, 0 0 10px #ffea00, 0 0 15px #ffea00;
+            transform: scale(1);
+        }
+        50% {
+            text-shadow: 0 0 7px #ffea00, 0 0 20px #ffc400, 0 0 25px #ffea00;
+            transform: scale(1);
+        }
+        100% {
+            text-shadow: 0 0 3px #ffc400, 0 0 10px #ffea00, 0 0 15px #ffea00;
+            transform: scale(1);
+        }
+    }
+    .current-radio-playing-container div p {
+
+        margin-top: 15px;
+
+    }
+}

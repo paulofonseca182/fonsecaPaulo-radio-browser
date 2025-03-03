@@ -58,7 +58,7 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
   
 
   return (
-    <div className="search-container">
+    <>
       <form className="search-form" onSubmit={handleSubmit}>
         <div className=" search-filters-container ">
           <i onClick={() => setFilter(!filter)} className="fa fa-bars">
@@ -111,8 +111,8 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
       </form>
 
       {isLoading ? (
-        //colocar className no p para centralizar texto ao centro com lib tailwindcss
-        <p className="text-center">Loading...</p>
+
+        <p className="Loading-search">Loading...</p>
       ) : (
         <div>
           <h3 className="text-radios">Radios:</h3>
@@ -160,7 +160,7 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
           <i className="fa fa-chevron-right"></i>
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

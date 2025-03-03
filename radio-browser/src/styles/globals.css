@@ -42,3 +42,12 @@ label {
 label input[type="checkbox"] {
   margin-right: 5px;
 }
+
+
+@media (max-width: 1024px) {
+  body {
+    line-height: 1;
+    padding: 10px 10px;
+    color: #ffffff;
+  }
+}
