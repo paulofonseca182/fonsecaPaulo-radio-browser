@@ -9,7 +9,9 @@ function CurrentRadioPlaying({ currentRadioPlaying }: PropsPlayingType) {
 
   useEffect(() => {
     const datareproduction = loadReproductionData();
-    const savedVolume = datareproduction ? datareproduction.volume : 1;
+    console.log(datareproduction);
+    
+    const savedVolume = datareproduction.volume || 1;
     setVolume(savedVolume);
 
     if (audioRef.current) {
