@@ -105,7 +105,7 @@ function Search( { favoriteRadios, toggleFavorite, setCurrentRadioPlaying}: Prop
           />
 
           <button type="submit" disabled={isLoading}>
-            {isLoading ? "Loading..." : <i className="fa fa-search"> Search</i>}
+            {isLoading ? "..." : <i className="fa fa-search"> Search</i>}
           </button>
         </div>
       </form>
